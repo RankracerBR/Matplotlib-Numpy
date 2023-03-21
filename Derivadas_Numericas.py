@@ -71,3 +71,34 @@ plt.legend()
 
 plt.grid()
 plt.show()
+
+#
+t = np.arange(6)
+p = np.array([0,5,20,45,80,125], dtype=float)
+idx = 2
+
+
+def derivada_discreta(x,y):
+  v = []
+  for i in range(len(x)):
+    if i!=0 and i!=len(x)-1:
+      d = (y[i+1] - y[i-1]) / (x[i+1] - x[i-1])
+    elif i==0:
+      d = (y[i+1] - y[i]) / (x[i+1] - x[i])
+    elif i == len(x) - 1:
+      d = (y[i] - y[i-1]) / (x[i] - x[i-1])
+    v.append(d)
+  return v
+
+dxdy_8 = derivada_discreta(t,p)
+
+x = np.linspace(0,2*np.pi,20)
+y = np.cos(x)
+
+dxdy_9 = derivada_discreta(x,y)
+
+plt.figure(figsize=(12,8))
+plt.scatter(x,dxdy_9,s=100,c='red')
+plt.plot(x,-np.sin(x))
+plt.grid()
+plt.show()
