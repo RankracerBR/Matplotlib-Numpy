@@ -128,26 +128,13 @@ tempo = np.array([0,0.5,1,1.5,2])
 temperatura = np.array([20.5,25.1,30.2,36.1,43.5])
 pressao = np.array([101.3,103.2,106.1,110.3,116.1])
 
-h = 0.5
+discreta = derivada_discreta(tempo,temperatura)
+discreta_final = derivada_discreta(discreta,pressao)
+print(f'*Tempo/Temperatura: {discreta}')
+print(f'*Resultado final: {discreta_final}')
 
-dTdt_prog = np.zeros_like(temperatura)
-dTdt_prog[:-1] = (temperatura[1:] - temperatura[:-1]) / h
-print(f'*Derivada Progressiva(temperatura):{dTdt_prog}')
-
-# Derivada regressiva da temperatura
-dTdt_reg = np.zeros_like(temperatura)
-dTdt_reg[1:] = (temperatura[1:] - temperatura[:-1]) / h
-print(f'Derivada Regressiva(temperatura){dTdt_reg}')
-# Derivada progressiva da pressao
-dPdt_prog = np.zeros_like(pressao)
-dPdt_prog[:-1] = (pressao[1:] - pressao[:-1]) / h
-print(f'Derivada Progressiva(pressão){dTdt_prog}')
-# Derivada regressiva da pressao
-dPdt_reg = np.zeros_like(pressao)
-dPdt_reg[1:] = (pressao[1:] - pressao[:-1]) / h
-print(f'Derivada Regressiva(pressão):{dTdt_reg}')
-print('\n')
-dTdt_2 = [(temperatura[i+1] - temperatura[i-1]) / (2 * h) for i in range(1, len(temperatura)-1)]
-dPdt_2 = [(pressao[i+1] - pressao[i-1]) / (2 * h) for i in range(1, len(pressao)-1)]
-print(f'*Derivada Central(temperatura): {dTdt_2}')
-print(f'*Derivada Central(pressão): {dPdt_2}')
+plt.figure(figsize=(12,8))
+plt.plot(discreta, discreta_final,label="Variação Total")
+plt.legend()
+plt.grid()
+plt.show()
