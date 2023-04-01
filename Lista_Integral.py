@@ -26,6 +26,21 @@ def fx4(x):
 def fx5(x):
     return 8 + 4*(np.cos(x))
 
+def simpson(f,a,b,n):
+  assert n % 2 == 0, 'Quantidade inválida de intervalos'
+
+  h = (b - a) / n
+  x = np.arange(a,b+h,h)
+  y = f(x)
+  integral = (h/3) * (y[0] + 4*np.sum(y[1:-1:2]) + 2*np.sum(y[2:-1:2]) + y[-1])
+  return integral 
+
+def fx6(x):
+  return 0.2 + 25*x + 200*x**2 + 675*x**3 - 900*x**4 + 400*x**5
+
+def fx7(x):
+  return x**3 - 2*x + 1
+
 #1
 a = 0 
 b = 2 
@@ -104,5 +119,15 @@ print(f'6- {trape_6}')
 print('\n')
 
 #7
+simp1 = simpson(fx5,0,np.pi/2,10)
+print(f'7- Comperação: Trapézio: {trape_6}, Simpson: {simp1}')
+print('\n')
 
+#8
+simp2 = simpson(fx6,0,0.8,10)
+print(simp2)
+print('\n')
 
+#9
+simp3 = simpson(fx7,0,2,10)
+print(simp3)
