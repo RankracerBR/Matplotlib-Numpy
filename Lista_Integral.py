@@ -102,3 +102,7 @@ y = fx5(x)
 trape_6 = trapezio(x,y,h)
 print(f'6- {trape_6}')
 print('\n')
+
+#7
+
+
