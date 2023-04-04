@@ -1,5 +1,6 @@
 #Imports
 import numpy as np
+import matplotlib.pyplot as plt
 
 #Funções
 def fx(x):
@@ -131,3 +132,21 @@ print('\n')
 #9
 simp3 = simpson(fx7,0,2,10)
 print(simp3)
+
+#10
+x = np.array([2,2.2,2.3,2.4,2.5,2.7])
+fx_ = np.array([0.707,0.674,0.659,0.645,0.632,0.609])
+
+total_resultado = 0
+curva = []
+
+for i in range(len(x) - 1):
+    total_resultado += (x[i+1] - x[i]) * (fx_[i] + fx_[i+1]) / 2
+    curva.append(total_resultado)
+print(total_resultado)
+print('\n')
+
+plt.figure(figsize=(12,8))
+plt.plot(x[:-1],curva,'o-')
+plt.grid()
+plt.show()
